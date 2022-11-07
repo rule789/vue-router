@@ -40,7 +40,12 @@ export default {
   }
 
   .main-view {
-    width: 100%
+    width: 100%;
+    padding: 10px;
+  }
+
+  .container {
+    display: flex;
   }
   
 </style>

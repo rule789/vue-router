@@ -8,6 +8,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: '/destination/:id/:slug',
+    name: 'destination.show',
+    component: () => import("@/views/DestinationShow.vue")
+  },
+  {
     path: "/about",
     name: "about",
     // route level code-splitting
@@ -21,6 +26,8 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  // 如果是 active 路徑，自動給予 class
+  linkActiveClass: 'path-active'
 });
 
 export default router;

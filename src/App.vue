@@ -3,7 +3,13 @@
   <div class="container">
     <!-- <router-view :key="$route.path"></router-view> -->
 
-    <router-view v-slot="{Component}">
+    <router-view v-slot="{Component}" name="LeftSidebar" class="view left-sidebar">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" :key="$route.path"></component>
+      </transition>
+    </router-view>
+
+    <router-view v-slot="{Component}" class="main-view">
       <transition name="fade" mode="out-in">
         <component :is="Component" :key="$route.path"></component>
       </transition>

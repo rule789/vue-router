@@ -55,6 +55,7 @@ router/index.js
 route.params
 ```
 
+
 ### router-view 要加 :key  
 in APP.vue
 才會監視
@@ -75,7 +76,10 @@ router-view 的 compomenet 再加 route-view
 把頁面塞進去
 
 ### 程式 router 操作
-回上一頁  `$router.back()`
+回上一頁  `this.$router.back()`
+導向某一頁 `this.$router.push(xxx)`
+動態增加路徑 `this.$router.addRoute(...)`
+動態刪除路徑 `this.$router.removeRoute(...)`
 
 ### not found 
 path: "/:pathMatch(.*)*",
@@ -94,6 +98,23 @@ path: "/:pathMatch(.*)*",
 
 ### 前後頁，按下後，滑到哪 scrollBehavior
 在 router 設置
-savedPosition // 跟原生網頁一樣表現
+savedPosition => 跟原生網頁一樣表現
 
+### 全域可以用 window.xxx
+window.user
 
+### 路徑權限
+path 設定 meta，用 router.beforeEach 去判斷
+router/index.js 中，要導到哪個路徑，用 return 
+
+### 全域註冊 router-link 元件
+什麼東西？！
+要在 main.js 註冊 component
+元件就不用再導入
+
+### path 可以設定多個 compoment 
+用 compoments
+ex 有副導覽列、主元件
+
+### path 可以用別名 或重導
+設置 alias、redirect 

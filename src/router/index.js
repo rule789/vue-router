@@ -7,6 +7,34 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+    alias: '/home'
+  },
+  {
+    path: "/protected",
+    name: "protected",
+    components: {
+      default: () => import( "../views/ProtectedView.vue"),
+      LeftSidebar: () => import("../components/LeftSidebar.vue")
+    },
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: "/invoice",
+    name: "invoice",
+    components: {
+      default: () => import( "../views/InvoiceView.vue"),
+      LeftSidebar: () => import("../components/LeftSidebar.vue")
+    },
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import( "../views/LoginView.vue"),
   },
   {
     path: '/destination/:id/:slug',
@@ -19,7 +47,7 @@ const routes = [
           return {
             name: 'NotFound',
             // 保留當前路徑並刪除第一個字符，以避免目標 ＵＲＬ以 `//` 開頭
-            params: {pathMatch: to.path.split('/'.slice(1))},
+            params: {pathMatch: to.path.split('/').slice(1)},
             // 保留現有的查詢和 hash 值，如果有的話
             query: to.query,
             hash: to.hash
@@ -62,6 +90,17 @@ const router = createRouter({
     return savedPosition || new Promise((resolve) => {
       setTimeout(() => resolve({top: 0}), 300)
     })
+  }
+});
+
+router.beforeEach((to) => {
+  if(to.meta.requireAuth && !window.user){
+    return {
+      name: 'login',
+      query: {
+        redirect: to.fullPath
+      }
+    }
   }
 });
 

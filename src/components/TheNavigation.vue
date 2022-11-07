@@ -1,8 +1,8 @@
 <template>
     <div id="nav">
         <div>
-            <router-link to="/">Home</router-link>
-            <router-link v-for="destination in destinations" 
+            <AppLink to="/">Home</AppLink>
+            <AppLink v-for="destination in destinations" 
                 :to="{
                     name: 'destination.show',
                     params: {
@@ -13,7 +13,9 @@
                 :key="destination.id"
             >
                 {{destination.name}}
-            </router-link>
+            </AppLink>
+            <AppLink to="/protected">Dashboard</AppLink>
+            <AppLink to="https://google.com">Google</AppLink>
         </div>
     </div>
 </template>
@@ -26,7 +28,9 @@
 
 <script>
 import sourceData from '@/data.json'
+
 export default {
+    components: {},
     data(){
         return {
             destinations: sourceData.destinations
